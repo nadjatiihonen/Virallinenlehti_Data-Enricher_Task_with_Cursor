@@ -63,19 +63,18 @@ jobs:
           sudo chmod -R a+rX data || true
           ls -la data/final || true
 
-      - name: Prepare readable artifact bundle
+      - name: Prepare artifact archive
         if: always()
         run: |
-          mkdir -p artifact-output
-          sudo cp -a data/final/. artifact-output/ || true
-          sudo chown -R "$USER":"$USER" artifact-output || true
-          chmod -R a+rX artifact-output || true
-          ls -la artifact-output || true
+          sudo tar -czf etl-final-output.tar.gz -C data final || true
+          sudo chown "$USER":"$USER" etl-final-output.tar.gz || true
+          chmod 644 etl-final-output.tar.gz || true
+          ls -la etl-final-output.tar.gz || true
 
       - name: Upload ETL artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: etl-final-output
-          path: artifact-output/
+          path: etl-final-output.tar.gz
           if-no-files-found: warn
