@@ -1,4 +1,4 @@
-# Official Gazette Data Enricher
+# Virallinen-lehti Data Enricher
 
 ## 📋 Yleiskatsaus
 Tämä projekti on automatisoitu ratkaisu historiallisen konkurssi- ja yrityssaneeraustiedon keräämiseen Virallisesta lehdestä (virallinenlehti.fi). Koska tieto on saatavilla vain PDF-muodossa, projekti hyödyntää modernia tekoälypohjaista tekstinlouhintaa datan rikastamiseksi ja rakenteistamiseksi.
