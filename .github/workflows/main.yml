@@ -56,6 +56,13 @@ jobs:
           test -f data/final/konkurssitiedot_staging.xlsx
           test -f data/final/upload_report.json
 
+      - name: Normalize artifact permissions
+        if: always()
+        run: |
+          sudo chown -R "$USER":"$USER" data || true
+          chmod -R u+rwX,go+rX data || true
+          ls -la data/final || true
+
       - name: Upload ETL artifacts
         if: always()
         uses: actions/upload-artifact@v4
