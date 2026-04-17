@@ -1,0 +1,8 @@
+requests
+pymupdf
+pandas
+openpyxl
+instructor
+openai
+pydantic
+python-dotenv

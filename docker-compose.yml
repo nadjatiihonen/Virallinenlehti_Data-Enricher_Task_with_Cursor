@@ -1,0 +1,22 @@
+services:
+  etl:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: official-gazette-etl
+    env_file:
+      - .env
+    environment:
+      GAZETTE_YEAR: ${GAZETTE_YEAR:-2024}
+      GAZETTE_NUMBER: ${GAZETTE_NUMBER:-001}
+      EXTRACTOR_DRY_RUN: ${EXTRACTOR_DRY_RUN:-0}
+    volumes:
+      - ./data:/app/data
+    command: >
+      sh -c "
+      python src/downloader.py --year $$GAZETTE_YEAR --number $$GAZETTE_NUMBER &&
+      python src/parser.py &&
+      python src/extractor.py &&
+      python src/exporter.py &&
+      python src/uploader.py
+      "

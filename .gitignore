@@ -1,0 +1,24 @@
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local virtual environments
+.venv/
+venv/
+
+# Generated pipeline data
+data/raw/
+data/processed/
+data/final/
+
+# macOS
+.DS_Store
