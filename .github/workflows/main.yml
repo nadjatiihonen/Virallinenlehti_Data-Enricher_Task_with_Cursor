@@ -60,13 +60,22 @@ jobs:
         if: always()
         run: |
           sudo chown -R "$USER":"$USER" data || true
-          chmod -R u+rwX,go+rX data || true
+          sudo chmod -R a+rX data || true
           ls -la data/final || true
+
+      - name: Prepare readable artifact bundle
+        if: always()
+        run: |
+          mkdir -p artifact-output
+          sudo cp -a data/final/. artifact-output/ || true
+          sudo chown -R "$USER":"$USER" artifact-output || true
+          chmod -R a+rX artifact-output || true
+          ls -la artifact-output || true
 
       - name: Upload ETL artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: etl-final-output
-          path: data/final/
+          path: artifact-output/
           if-no-files-found: warn
